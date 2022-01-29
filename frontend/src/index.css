@@ -5,3 +5,13 @@ body {
 *{
   font-family: "Lato", "Helvetica Neue", sans-serif;
 }
+
+.btn-standard {
+  background-color: #ff3366;
+  color: white;
+}
+
+.btn-standard:hover {
+  background-color: #fc285d;
+  color: white;
+}
