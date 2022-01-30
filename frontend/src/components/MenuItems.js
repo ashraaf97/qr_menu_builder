@@ -39,11 +39,11 @@ const MenuItem = ({ item, onEdit, onRemove, onOrder, color }) => (
               </Button>
             ) : null }
 
-            {/*{ onRemove ? (*/}
-            {/*  <Button variant="link" onClick={onRemove}>*/}
-            {/*    <AiOutlineDelete size={20} color="red" />*/}
-            {/*  </Button>*/}
-            {/*) : null }*/}
+            { onRemove ? (
+              <Button variant="link" onClick={onRemove}>
+                <AiOutlineDelete size={20} color="red" />
+              </Button>
+            ) : null }
           </div>
         </div>
         <p className="mb-4">{item.description}</p>
