@@ -63,3 +63,22 @@ export function register(username,password){
 export function fetchPlaces(token){
     return request("/api/places/", {token});
 }
+
+export function addPlace(data, token) {
+  return request("/api/places/", { data, token, method: "POST" });
+}
+
+export  function uploadImage(image){
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "qr_menu-photos")
+
+    return fetch("https://api.cloudinary.com/v1_1/dizlnyqcz/image/upload", {
+        method: "POST",
+        body: formData,
+    }).then((response) => {
+        return response.json();
+        }
+
+    )
+}
