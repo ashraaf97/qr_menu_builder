@@ -3,20 +3,22 @@ import {Button, Form, Popover, Overlay} from "react-bootstrap";
 import {RiPlayListAddFill} from "react-icons/ri";
 import {toast} from "react-toastify";
 
-import {addCategory, addMenuItem} from "../apis";
+import {addCategory, addMenuItem, updateMenuItem} from "../apis";
 import AuthContext from "../contexts/AuthContext";
 import ImageDropZone from "./ImageDropZone";
 
-const MenuItemForm = ({place, onDone}) => {
+const MenuItemForm = ({place, onDone, item = {}}) => {
     const [categoryName, setCategoryName] = useState("");
     const [categoryFormShow, setCategoryFormShow] = useState(false);
-    const [category, setCategory] = useState("");
 
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
-    const [isAvailable, setIsAvailable] = useState(true);
+    const [category, setCategory] = useState(item.category);
+    const [name, setName] = useState(item.name);
+    const [price, setPrice] = useState(item.price);
+    const [description, setDescription] = useState(item.description);
+    const [image, setImage] = useState(item.image);
+    const [isAvailable, setIsAvailable] = useState(
+        item.is_available === undefined ? true : !!item.is_available
+    );
 
     const target = useRef(null);
 
@@ -32,6 +34,34 @@ const MenuItemForm = ({place, onDone}) => {
             setCategoryFormShow(false);
             onDone();
         }
+    }
+
+    const onUpdateMenuItem = async () => {
+        const json = await updateMenuItem(
+            item.id,
+            {
+                place: place.id,
+                category,
+                name,
+                price,
+                description,
+                image,
+                is_available: isAvailable
+            },
+            auth.token
+        );
+
+        if (json) {
+            console.log(json)
+            toast(`Menu Item ${json.name} was updated.`, {type: "success"});
+            setCategory(json.id);
+            setPrice(0);
+            setDescription("");
+            setImage("");
+            setIsAvailable(false);
+            onDone();
+        }
+
     }
 
     const onAddMenuItems = async () => {
@@ -152,9 +182,9 @@ const MenuItemForm = ({place, onDone}) => {
             <Button
                 variant="standard"
                 block
-                onClick={onAddMenuItems}
+                onClick={item.id ? onUpdateMenuItem : onAddMenuItems}
             >
-                + Add Menu Item
+                {item.id ? "Update Menu Item" : "+ Add Menu Item"}
             </Button>
         </div>
     )
