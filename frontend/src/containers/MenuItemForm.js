@@ -152,8 +152,9 @@ const MenuItemForm = ({place, onDone}) => {
             <Button
                 variant="standard"
                 block
+                onClick={onAddMenuItems}
             >
-                + Add Menu Item"}
+                + Add Menu Item
             </Button>
         </div>
     )

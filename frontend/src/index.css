@@ -1,17 +1,17 @@
 body {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 
-*{
-  font-family: "Lato", "Helvetica Neue", sans-serif;
+* {
+    font-family: "Lato", "Helvetica Neue", sans-serif;
 }
 
 .btn-standard {
-  background-color: #ff3366;
-  color: white;
+    background-color: #001b68;
+    color: white;
 }
 
 .btn-standard:hover {
-  background-color: #fc285d;
-  color: white;
+    background-color: #0339d6;
+    color: white;
 }
