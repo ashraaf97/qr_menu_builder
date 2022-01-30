@@ -82,3 +82,7 @@ export  function uploadImage(image){
 
     )
 }
+
+export function fetchPlace(id, token) {
+  return request(`/api/places/${id}`, { token });
+}
