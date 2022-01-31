@@ -1,5 +1,5 @@
 # qr_menu_builder
-A simple app that demonstrate the django backend, react frotend, stripe payment.
+A simple app that demonstrate the django backend, react frontend, stripe payment.
 Context: Use QR Code to order food by scanning qr code on the table to promote social distancing for health safety during pandemic. Use Stripe payment directly from the app and wait for the order to finish.
 
 
