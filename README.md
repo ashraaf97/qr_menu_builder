@@ -10,12 +10,10 @@ Context: Use QR Code to order food by scanning qr code on the table to promote s
 ![image 1](https://imgur.com/VjT7OBX.jpg)
 
 ### QRCode Generate Page:
-![image 1](https://i.imgur.com/I6iIDlW.jpg)
-
+![image 1](https://imgur.com/kHGotl2.jpg)
 
 ### Payment Page Page:
 ![image 1](https://imgur.com/iZQgTbK.jpg)
-
 
 ### Orders Page:
 ![image 1](https://imgur.com/pTRt1b7.jpg)
