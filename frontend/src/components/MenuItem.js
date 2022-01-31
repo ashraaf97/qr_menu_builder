@@ -1,8 +1,8 @@
-import { Col, Button } from 'react-bootstrap';
+import {Col, Button} from 'react-bootstrap';
 import React from 'react';
 import styled from 'styled-components';
-import { BiEdit } from 'react-icons/bi';
-import { AiOutlineDelete } from 'react-icons/ai';
+import {BiEdit} from 'react-icons/bi';
+import {AiOutlineDelete} from 'react-icons/ai';
 
 const Container = styled.div`
   border-radius: 5px;
@@ -23,43 +23,55 @@ const Container = styled.div`
   }
 `;
 
-const MenuItem = ({ item, onEdit, onRemove, onOrder, color }) => (
-  <Container active={item.is_available}>
-    <Col xs={5} style={{ backgroundImage: `url(${item.image})` }} />
-    <Col xs={7} className="d-flex flex-column justify-content-between w-100">
-      <div>
-        <div className="d-flex justify-content-between align-items-center mb-2">
-          <h4 className="mb-2">
-            <b>{item.name}</b>
-          </h4>
-          <div>
-            { onEdit ? (
-              <Button variant="link" onClick={onEdit}>
-                <BiEdit size={20} />
-              </Button>
-            ) : null }
+const MenuItem = ({item, onEdit, onRemove, onOrder, color}) => (
+    <Container active={item.is_available}>
+        <Col xs={5} style={{backgroundImage: `url(${item.image})`}}/>
+        <Col xs={7} className="d-flex flex-column justify-content-between w-100">
+            <div>
+                <div className="d-flex justify-content-between align-items-center mb-2">
+                    <h4 className="mb-0">
+                        <b>{item.name}</b>
+                    </h4>
+                    <div>
+                        {onEdit ? (
+                            <Button variant="link" onClick={onEdit}>
+                                <BiEdit size={20}/>
+                            </Button>
+                        ) : null}
 
-            { onRemove ? (
-              <Button variant="link" onClick={onRemove}>
-                <AiOutlineDelete size={20} color="red" />
-              </Button>
-            ) : null }
-          </div>
-        </div>
-        <p className="mb-4">{item.description}</p>
-      </div>
-      <div className="d-flex justify-content-between align-items-end">
-        <div>
-          <h5 className="mb-0 text-standard">
-            <b style={{ color }}>${item.price}</b>
-          </h5>
-        </div>
+                        {onRemove ? (
+                            <Button variant="link" onClick={onRemove}>
+                                <AiOutlineDelete size={20} color="red"/>
+                            </Button>
+                        ) : null}
+                    </div>
+                </div>
+                <p className="mb-4">{item.description}</p>
+            </div>
+            <div className="d-flex justify-content-between align-items-end">
+                <div>
+                    <h5 className="mb-0 text-standard">
+                        <b style={{color}}>${item.price}</b>
+                    </h5>
 
-        {!item.is_available ? (<small className="text-secondary">Not Available</small>) : null}
+                    {onOrder ? (
+                        <Button
+                            variant="standard"
+                            style={{backgroundColor: color}}
+                            className="mt-2"
+                            size="sm"
+                            onClick={() => onOrder(item)}
+                        >
+                            {!item.quantity ? "Add to shopping cart" : `Add one more (${item.quantity})`}
+                        </Button>
+                    ) : null}
+                </div>
 
-      </div>
-    </Col>
-  </Container>
+                {!item.is_available ? (<small className="text-secondary">Not Available</small>) : null}
+
+            </div>
+        </Col>
+    </Container>
 );
 
 export default MenuItem;

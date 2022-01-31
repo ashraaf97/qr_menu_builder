@@ -1,6 +1,6 @@
-import {Button, Jumbotron, Container, Row, Col, Image} from "react-bootstrap";
+import {Button, Jumbotron, Container, Row, Col, Image} from 'react-bootstrap';
 import React from 'react';
-import MainLayout from "../layouts/MainLayout";
+import MainLayout from '../layouts/MainLayout';
 
 const Home = () => (
     <MainLayout>

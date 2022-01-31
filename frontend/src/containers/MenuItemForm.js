@@ -1,11 +1,11 @@
-import React, {useState, useContext, useRef} from "react";
-import {Button, Form, Popover, Overlay} from "react-bootstrap";
-import {RiPlayListAddFill} from "react-icons/ri";
-import {toast} from "react-toastify";
+import React, {useState, useContext, useRef} from 'react';
+import {Button, Form, Popover, Overlay} from 'react-bootstrap';
+import {RiPlayListAddFill} from 'react-icons/ri';
+import {toast} from 'react-toastify';
 
-import {addCategory, addMenuItem, updateMenuItem} from "../apis";
-import AuthContext from "../contexts/AuthContext";
-import ImageDropZone from "./ImageDropZone";
+import {addCategory, addMenuItems, updateMenuItem} from '../apis';
+import AuthContext from '../contexts/AuthContext';
+import ImageDropzone from './ImageDropzone';
 
 const MenuItemForm = ({place, onDone, item = {}}) => {
     const [categoryName, setCategoryName] = useState("");
@@ -13,7 +13,7 @@ const MenuItemForm = ({place, onDone, item = {}}) => {
 
     const [category, setCategory] = useState(item.category);
     const [name, setName] = useState(item.name);
-    const [price, setPrice] = useState(item.price);
+    const [price, setPrice] = useState(item.price || 0);
     const [description, setDescription] = useState(item.description);
     const [image, setImage] = useState(item.image);
     const [isAvailable, setIsAvailable] = useState(
@@ -26,7 +26,8 @@ const MenuItemForm = ({place, onDone, item = {}}) => {
 
     const onAddCategory = async () => {
         const json = await addCategory({name: categoryName, place: place.id}, auth.token);
-        console.log(json)
+        console.log(json);
+
         if (json) {
             toast(`Category ${json.name} was created.`, {type: "success"});
             setCategory(json.id);
@@ -34,38 +35,10 @@ const MenuItemForm = ({place, onDone, item = {}}) => {
             setCategoryFormShow(false);
             onDone();
         }
-    }
-
-    const onUpdateMenuItem = async () => {
-        const json = await updateMenuItem(
-            item.id,
-            {
-                place: place.id,
-                category,
-                name,
-                price,
-                description,
-                image,
-                is_available: isAvailable
-            },
-            auth.token
-        );
-
-        if (json) {
-            console.log(json)
-            toast(`Menu Item ${json.name} was updated.`, {type: "success"});
-            setCategory(json.id);
-            setPrice(0);
-            setDescription("");
-            setImage("");
-            setIsAvailable(false);
-            onDone();
-        }
-
-    }
+    };
 
     const onAddMenuItems = async () => {
-        const json = await addMenuItem({
+        const json = await addMenuItems({
             place: place.id,
             category,
             name,
@@ -89,6 +62,34 @@ const MenuItemForm = ({place, onDone, item = {}}) => {
         }
     }
 
+    const onUpdateMenuItem = async () => {
+        const json = await updateMenuItem(
+            item.id,
+            {
+                place: place.id,
+                category,
+                name,
+                price,
+                description,
+                image,
+                is_available: isAvailable
+            },
+            auth.token
+        );
+
+        if (json) {
+            console.log(json);
+
+            toast(`Menu Item ${json.name} was updated`, {type: "success"});
+            setCategory("");
+            setName("");
+            setPrice(0)
+            setDescription("");
+            setImage("");
+            setIsAvailable(false);
+            onDone();
+        }
+    }
 
     return (
         <div>
@@ -139,6 +140,7 @@ const MenuItemForm = ({place, onDone, item = {}}) => {
 
                 </div>
             </Form.Group>
+
             {/* MENU ITEMS FORM */}
             <Form.Group>
                 <Form.Label>Name</Form.Label>
@@ -169,7 +171,7 @@ const MenuItemForm = ({place, onDone, item = {}}) => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Image</Form.Label>
-                <ImageDropZone value={image} onChange={setImage}/>
+                <ImageDropzone value={image} onChange={setImage}/>
             </Form.Group>
             <Form.Group>
                 <Form.Check
@@ -187,7 +189,8 @@ const MenuItemForm = ({place, onDone, item = {}}) => {
                 {item.id ? "Update Menu Item" : "+ Add Menu Item"}
             </Button>
         </div>
-    )
+
+    );
 }
 
 export default MenuItemForm;

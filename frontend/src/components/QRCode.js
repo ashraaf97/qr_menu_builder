@@ -1,9 +1,9 @@
-import { AiOutlineLink } from 'react-icons/ai';
-import { Button } from 'react-bootstrap';
+import {AiOutlineLink} from 'react-icons/ai';
+import {Button} from 'react-bootstrap';
 import QRCodeReact from 'qrcode.react';
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
-import { useReactToPrint } from 'react-to-print';
+import {useReactToPrint} from 'react-to-print';
 
 const Container = styled.div`
   position: relative;
@@ -36,37 +36,37 @@ const ComponentToPrint = styled.div`
   }
 `;
 
-const QRCode = ({ table, placeId }) => {
-  const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+const QRCode = ({table, placeId}) => {
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
 
-  const url = `${window.location.origin}/menu/${placeId}/${table}`;
+    const url = `${window.location.origin}/menu/${placeId}/${table}`;
 
-  return (
-    <Container>
-      <QRCodeReact value={url} size={200} />
-      <Overlay>
-        <div className="d-flex">
-          <Button variant="standard" onClick={handlePrint} className="mr-2">
-            {`Print Table ${table}`}
-          </Button>
-          <Button variant="standard" href={`/menu/${placeId}/${table}`} target="_blank">
-            <AiOutlineLink size={25} />
-          </Button>
-        </div>
-      </Overlay>
+    return (
+        <Container>
+            <QRCodeReact value={url} size={200}/>
+            <Overlay>
+                <div className="d-flex">
+                    <Button variant="standard" onClick={handlePrint} className="mr-2">
+                        {`Print Table ${table}`}
+                    </Button>
+                    <Button variant="standard" href={`/menu/${placeId}/${table}`} target="_blank">
+                        <AiOutlineLink size={25}/>
+                    </Button>
+                </div>
+            </Overlay>
 
-      <div style={{ display: "none" }}>
-        <ComponentToPrint ref={componentRef}>
-          <h1>Table {table}</h1>
-          <h2>Scan for menu</h2>
-          <QRCodeReact value={url} size={500} />
-        </ComponentToPrint>
-      </div>
-    </Container>
-  )
+            <div style={{display: "none"}}>
+                <ComponentToPrint ref={componentRef}>
+                    <h1>Table {table}</h1>
+                    <h2>Scan for menu</h2>
+                    <QRCodeReact value={url} size={500}/>
+                </ComponentToPrint>
+            </div>
+        </Container>
+    )
 }
 
 export default QRCode;

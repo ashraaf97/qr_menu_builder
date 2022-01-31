@@ -7,12 +7,12 @@ body {
 }
 
 .btn-standard {
-    background-color: #001b68;
+    background-color: #ff3366;
     color: white;
 }
 
 .btn-standard:hover {
-    background-color: #0339d6;
+    background-color: #fc285d;
     color: white;
 }
 

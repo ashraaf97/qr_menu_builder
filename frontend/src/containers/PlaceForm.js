@@ -1,10 +1,10 @@
-import {Form, Button, FormGroup} from "react-bootstrap";
-import React, {useState, useContext} from "react";
+import {Form, Button} from 'react-bootstrap';
+import React, {useState, useContext} from 'react';
 
-import {addPlace} from "../apis";
-import AuthContext from "../contexts/AuthContext";
+import {addPlace} from '../apis';
+import AuthContext from '../contexts/AuthContext';
 
-import ImageDropZone from "./ImageDropZone";
+import ImageDropzone from './ImageDropzone';
 
 const PlaceForm = ({onDone}) => {
     const [name, setName] = useState("");
@@ -21,7 +21,6 @@ const PlaceForm = ({onDone}) => {
         }
     }
 
-
     return (
         <div>
             <h4 className="text-center">Place</h4>
@@ -34,10 +33,11 @@ const PlaceForm = ({onDone}) => {
                     onChange={(e) => setName(e.target.value)}
                 />
             </Form.Group>
-            <FormGroup>
+
+            <Form.Group>
                 <Form.Label>Image</Form.Label>
-                <ImageDropZone value={image} onChange={setImage}/>
-            </FormGroup>
+                <ImageDropzone value={image} onChange={setImage}/>
+            </Form.Group>
             <Button variant="standard" block onClick={onClick}>
                 Add
             </Button>
